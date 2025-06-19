@@ -110,7 +110,7 @@ export const SkillsInfo = [
       image: githubdetLogo,
       tags: ["HTML", "CSS", "JavaScript", "React JS", "Tailwind Css", "EmailJS"],
       github: "https://github.com/amanydv1106/MyPortfolio.git",
-      webapp: "https:/aman-portfolio.versal.app/",
+      webapp: "https://aman-portfolio-website1.vercel.app/",
     },
   ];
   
