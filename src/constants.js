@@ -22,7 +22,7 @@ import vpsLogo from './assets/education_logo/school_logo.png';
 
 // Project Section Logo's
 import githubdetLogo from './assets/work_logo/portfolio.png';
-
+import demoLogo from './assets/work_logo/demo.png';
 
 export const SkillsInfo = [
   {
@@ -111,6 +111,16 @@ export const SkillsInfo = [
       tags: ["HTML", "CSS", "JavaScript", "React JS", "Tailwind Css", "EmailJS"],
       github: "https://github.com/amanydv1106/MyPortfolio.git",
       webapp: "https://aman-portfolio-website1.vercel.app/",
+    },
+    {
+      id: 1,
+      title: "Mini Ecommerce (Add to Cart functionality)",
+      description:
+        "Mini Ecommerce Store is a responsive shopping UI built with HTML, CSS, and JavaScript. It features an animated add-to-cart experience, a dynamic cart sidebar with localStorage support, and a clean, mobile-friendly design — all without using any frameworks.",
+      image: demoLogo,
+      tags: ["HTML", "CSS", "JavaScript"],
+      github: "https://github.com/amanydv1106/mini-ecommerce-Frontend.git",
+      webapp: "https://mini-ecommerce-frontend1.vercel.app/",
     },
   ];
   
