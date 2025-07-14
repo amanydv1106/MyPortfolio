@@ -94,7 +94,7 @@ export const SkillsInfo = [
       id: 3,
       img: vpsLogo,
       school: "Royal Public Sr. Sec. School Wazirpur, Gurugram",
-      date: "Apr 2017 - March 2018",
+      date: "Apr 2016 - March 2017",
       grade: "8.6 CGPA",
       desc: "I completed my class 10 education from Royal Public Sr. Sec. School Wazirpur, Gurugram, under the CBSE board, where I studied Science with Computer.",
       degree: "CBSE(X), Science with Computer Application",
