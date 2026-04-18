@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,14 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const handleMenuItemClick = (sectionId) => {
     setActiveSection(sectionId);
     setIsOpen(false);
@@ -28,26 +37,31 @@ const Navbar = () => {
 
   const menuItems = [
     { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
     { id: "experience", label: "Experience" },
+    { id: "skills", label: "Skills" },
     { id: "work", label: "Projects" },
     { id: "education", label: "Education" },
+    { id: "contact", label: "Contact" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
+      className={`section-shell fixed top-0 z-50 w-full transition duration-300 ${
         isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="text-white py-5 flex justify-between items-center">
-        <div className="text-lg font-semibold cursor-pointer">
+      <div className="flex items-center justify-between py-4 text-white sm:py-5">
+        <button
+          type="button"
+          onClick={() => handleMenuItemClick("about")}
+          className="text-lg font-semibold cursor-pointer"
+        >
           <span className="text-[#8245ec]">&lt;</span>
           <span className="text-white">Aman</span>
           <span className="text-[#8245ec]">&gt;</span>
-        </div>
+        </button>
 
-        <ul className="hidden md:flex space-x-8 text-gray-300">
+        <ul className="hidden items-center space-x-5 text-sm text-gray-300 lg:flex xl:space-x-8 xl:text-base">
           {menuItems.map((item) => (
             <li
               key={item.id}
@@ -62,15 +76,7 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className="hidden md:flex space-x-4">
-          <a
-            href="https://github.com/amanydv1106"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
-          >
-            <FaGithub size={24} />
-          </a>
+        <div className="hidden space-x-4 lg:flex">
           <a
             href="https://www.linkedin.com/in/amanydv1106/"
             target="_blank"
@@ -79,10 +85,26 @@ const Navbar = () => {
           >
             <FaLinkedin size={24} />
           </a>
+          <a
+            href="https://leetcode.com/u/amanydv1106/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-300 hover:text-[#8245ec]"
+          >
+            <SiLeetcode size={24} />
+          </a>
+          <a
+            href="https://github.com/amanydv1106"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-300 hover:text-[#8245ec]"
+          >
+            <FaGithub size={24} />
+          </a>
         </div>
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           {isOpen ? (
             <FiX
               className="text-3xl text-[#8245ec] cursor-pointer"
@@ -99,8 +121,8 @@ const Navbar = () => {
 
       {/* Mobile Menu Items */}
       {isOpen && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
+        <div className="absolute left-1/2 top-[calc(100%-0.25rem)] z-50 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 rounded-2xl border border-white/10 bg-[#050414]/95 p-6 shadow-lg backdrop-blur-lg lg:hidden">
+          <ul className="flex flex-col items-center gap-4 text-gray-300">
             {menuItems.map((item) => (
               <li
                 key={item.id}
@@ -113,7 +135,7 @@ const Navbar = () => {
                 </button>
               </li>
             ))}
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 pt-2">
               <a
                 href="https://github.com/amanydv1106"
                 target="_blank"

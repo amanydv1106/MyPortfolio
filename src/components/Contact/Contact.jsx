@@ -1,4 +1,4 @@
-import  { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,25 +6,37 @@ import "react-toastify/dist/ReactToastify.css";
 const Contact = () => {
   const form = useRef();
   const [isLoading, setIsLoading] = useState(false);
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const isEmailConfigured = publicKey && serviceId && templateId;
 
   useEffect(() => {
-    emailjs.init("fb8KHC3lSgXRxPXRU");
-  }, []);
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, [publicKey]);
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    if (!isEmailConfigured) {
+      toast.error("Email service is not configured yet. Please update your .env file.", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "dark",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     emailjs
-      .sendForm(
-        "service_0td5db6",    
-        "template_cpjy5kb",   
-        form.current
-      )
+      .sendForm(serviceId, templateId, form.current)
       .then(
         () => {
           form.current.reset();
-          toast.success("Message sent successfully! ✅", {
+          toast.success("Message sent successfully!", {
             position: "top-right",
             autoClose: 3000,
             theme: "dark",
@@ -45,21 +57,21 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="flex flex-col items-center justify-center py-24 px-[12vw] md:px-[7vw] lg:px-[20vw]"
+      className="section-shell flex flex-col items-center justify-center py-16 sm:py-20 lg:py-24"
     >
       <ToastContainer />
 
-      <div className="text-center mb-16">
+      <div className="mb-16 text-center">
         <h2 className="text-4xl font-bold text-white">CONTACT</h2>
-        <div className="w-32 h-1 bg-purple-500 mx-auto mt-4"></div>
-        <p className="text-gray-400 mt-4 text-lg font-semibold">
-          I’d love to hear from you—reach out for any opportunities or questions!
+        <div className="mx-auto mt-4 h-1 w-32 bg-purple-500"></div>
+        <p className="mx-auto mt-4 max-w-3xl text-base font-semibold text-gray-400 sm:text-lg">
+          I&apos;d love to hear from you. Reach out for any opportunities or questions.
         </p>
       </div>
 
-      <div className="mt-8 w-full max-w-md bg-[#0d081f] p-6 rounded-lg shadow-lg border border-gray-700">
-        <h3 className="text-xl font-semibold text-white text-center">
-          Connect With Me <span className="ml-1">🚀</span>
+      <div className="mt-2 w-full max-w-xl rounded-2xl border border-gray-700 bg-[#0d081f] p-5 shadow-lg sm:p-6">
+        <h3 className="text-center text-xl font-semibold text-white">
+          Connect With Me
         </h3>
 
         <form ref={form} onSubmit={sendEmail} className="mt-4 flex flex-col space-y-4">
@@ -68,38 +80,40 @@ const Contact = () => {
             name="user_name"
             placeholder="Your Name"
             required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
+            className="w-full rounded-md border border-gray-600 bg-[#131025] p-3 text-white focus:border-purple-500 focus:outline-none"
           />
           <input
             type="email"
             name="user_email"
             placeholder="Your Email"
             required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
+            className="w-full rounded-md border border-gray-600 bg-[#131025] p-3 text-white focus:border-purple-500 focus:outline-none"
           />
           <input
             type="text"
             name="subject"
             placeholder="Subject"
             required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
+            className="w-full rounded-md border border-gray-600 bg-[#131025] p-3 text-white focus:border-purple-500 focus:outline-none"
           />
           <textarea
             name="message"
             placeholder="Message"
             rows="4"
             required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
+            className="w-full rounded-md border border-gray-600 bg-[#131025] p-3 text-white focus:border-purple-500 focus:outline-none"
           />
 
           <button
             type="submit"
-            disabled={isLoading}
-            className={`w-full bg-gradient-to-r from-purple-600 to-pink-500 py-3 text-white font-semibold rounded-md transition ${
-              isLoading ? "opacity-70 cursor-not-allowed" : "hover:opacity-90"
+            disabled={isLoading || !isEmailConfigured}
+            className={`w-full rounded-md bg-gradient-to-r from-purple-600 to-pink-500 py-3 font-semibold text-white transition ${
+              isLoading || !isEmailConfigured
+                ? "cursor-not-allowed opacity-70"
+                : "hover:opacity-90"
             }`}
           >
-            {isLoading ? "Sending..." : "Send"}
+            {isLoading ? "Sending..." : isEmailConfigured ? "Send" : "Configure EmailJS"}
           </button>
         </form>
       </div>

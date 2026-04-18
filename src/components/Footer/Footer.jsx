@@ -1,5 +1,6 @@
 
-import {FaGithub, FaFacebook, FaLinkedin, FaInstagram} from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 
 const Footer = () => {
   const handleScroll = (sectionId) => {
@@ -10,32 +11,33 @@ const Footer = () => {
   };
 
   return (
-    <footer className="text-white py-8 px-[12vw] md:px-[7vw] lg:px-[20vw]">
+    <footer className="section-shell py-8 text-white">
       <div className="container mx-auto text-center">
         <h2 className="text-xl font-semibold text-purple-500">Aman</h2>
 
-        <nav className="flex flex-wrap justify-center space-x-4 sm:space-x-6 mt-4">
+        <nav className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-x-6">
           {[
             { name: "About", id: "about" },
-            { name: "Skills", id: "skills" },
             { name: "Experience", id: "experience" },
-            { name: "Projects", id: "projects" },
+            { name: "Skills", id: "skills" },
+            { name: "Projects", id: "work" },
             { name: "Education", id: "education" },
+            { name: "Contact", id: "contact" },
           ].map((item, index) => (
             <button
               key={index}
               onClick={() => handleScroll(item.id)}
-              className="hover:text-purple-500 text-sm sm:text-base my-1"
+              className="my-1 text-sm hover:text-purple-500 sm:text-base"
             >
               {item.name}
             </button>
           ))}
         </nav>
 
-        <div className="flex flex-wrap justify-center space-x-4 mt-6">
+        <div className="mt-6 flex flex-wrap justify-center gap-4">
           {[
-            { icon: <FaFacebook />, link: "https://www.facebook.com/aman.rao.10485546/" },
             { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/amanydv1106/" },
+            { icon: <SiLeetcode />, link: "https://leetcode.com/u/amanydv1106/" },
             { icon: <FaGithub />, link: "https://github.com/amanydv1106/" },
             { icon: <FaInstagram />, link: "https://www.instagram.com/amanydv01/" },
             
@@ -45,7 +47,7 @@ const Footer = () => {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl hover:text-purple-500 transition-transform transform hover:scale-110"
+              className="text-xl transition-transform hover:scale-110 hover:text-purple-500"
             >
               {item.icon}
             </a>

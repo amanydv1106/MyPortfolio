@@ -15,29 +15,29 @@ const Work = () => {
   return (
     <section
       id="work"
-      className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[20vw] font-sans relative"
+      className="section-shell relative py-16 font-sans sm:py-20 lg:py-24"
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-white">PROJECTS</h2>
         <div className="w-32 h-1 bg-purple-500 mx-auto mt-4"></div>
-        <p className="text-gray-400 mt-4 text-lg font-semibold">
+        <p className="mx-auto mt-4 max-w-3xl text-base font-semibold text-gray-400 sm:text-lg">
           A showcase of the projects I have worked on, highlighting my skills
-          and experience in various technologies
+          and experience in various technologies.
         </p>
       </div>
 
-      <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
         {projects.map((project) => (
           <div
             key={project.id}
             onClick={() => handleOpenModal(project)}
-            className="border border-white bg-gray-900 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden cursor-pointer hover:shadow-purple-500/50 hover:-translate-y-2 transition-transform duration-300"
+            className="cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-gray-900/85 shadow-2xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-purple-500/50"
           >
             <div className="p-4">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-48 object-cover rounded-xl"
+                className="h-48 w-full rounded-xl object-cover sm:h-56"
               />
             </div>
             <div className="p-6">
@@ -63,8 +63,8 @@ const Work = () => {
       </div>
 
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4">
-          <div className="bg-gray-900 rounded-xl shadow-2xl lg:w-full w-[90%] max-w-3xl overflow-hidden relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
+          <div className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-xl bg-gray-900 shadow-2xl">
             <div className="flex justify-end p-4">
               <button
                 onClick={handleCloseModal}
@@ -79,14 +79,14 @@ const Work = () => {
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="lg:w-full w-[95%] object-contain rounded-xl shadow-2xl"
+                  className="max-h-[16rem] w-full rounded-xl object-contain shadow-2xl sm:max-h-[20rem] lg:max-h-[24rem]"
                 />
               </div>
-              <div className="lg:p-8 p-6">
-                <h3 className="lg:text-3xl font-bold text-white mb-4 text-md">
+              <div className="p-5 sm:p-6 lg:p-8">
+                <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl">
                   {selectedProject.title}
                 </h3>
-                <p className="text-gray-400 mb-6 lg:text-base text-xs">
+                <p className="mb-6 text-sm text-gray-400 sm:text-base">
                   {selectedProject.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -99,12 +99,12 @@ const Work = () => {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <a
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-1/2 bg-gray-800 hover:bg-purple-800 text-gray-400 lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
+                    className="w-full rounded-xl bg-gray-800 px-4 py-3 text-center text-sm font-semibold text-gray-200 hover:bg-purple-800 sm:w-1/2 sm:text-base lg:text-xl"
                   >
                     View Code
                   </a>
@@ -112,7 +112,7 @@ const Work = () => {
                     href={selectedProject.webapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-1/2 bg-purple-600 hover:bg-purple-800 text-white lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
+                    className="w-full rounded-xl bg-purple-600 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-purple-800 sm:w-1/2 sm:text-base lg:text-xl"
                   >
                     View Live
                   </a>
