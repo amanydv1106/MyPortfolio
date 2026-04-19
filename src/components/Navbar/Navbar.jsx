@@ -137,20 +137,28 @@ const Navbar = () => {
             ))}
             <div className="flex space-x-4 pt-2">
               <a
-                href="https://github.com/amanydv1106"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaGithub size={24} />
-              </a>
-              <a
                 href="https://www.linkedin.com/in/amanydv1106/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white"
               >
                 <FaLinkedin size={24} />
+              </a>
+              <a
+                href="https://leetcode.com/u/amanydv1106/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-[#8245ec]"
+              >
+                <SiLeetcode size={24} />
+              </a>
+              <a
+                href="https://github.com/amanydv1106"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-white"
+              >
+                <FaGithub size={24} />
               </a>
             </div>
           </ul>
